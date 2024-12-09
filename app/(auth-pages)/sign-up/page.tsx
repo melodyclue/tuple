@@ -1,4 +1,4 @@
-import { signUpAction } from "@/app/actions";
+import { signInWithOAuthAction, signUpAction } from "@/app/actions";
 import { FormMessage, Message } from "@/components/form-message";
 import { SubmitButton } from "@/components/submit-button";
 import { Input } from "@/components/ui/input";
@@ -20,7 +20,7 @@ export default async function Signup(props: {
 
   return (
     <>
-      <form className="flex flex-col min-w-64 max-w-64 mx-auto">
+      {/* <form className="flex flex-col min-w-64 max-w-64 mx-auto">
         <h1 className="text-2xl font-medium">Sign up</h1>
         <p className="text-sm text text-foreground">
           Already have an account?{" "}
@@ -44,6 +44,14 @@ export default async function Signup(props: {
           </SubmitButton>
           <FormMessage message={searchParams} />
         </div>
+      </form> */}
+
+      <form>
+        <input type="hidden" name="username" value="test_username" />
+        <input type="hidden" name="provider" value="google" />
+        <SubmitButton formAction={signInWithOAuthAction} pendingText="Signing in...">
+          Sign in with Google
+        </SubmitButton>
       </form>
       <SmtpMessage />
     </>
