@@ -10,8 +10,9 @@ import { insertProfileSchema } from '@/utils/validation';
 export async function insertNewProfile(prevState: unknown, formData: FormData) {
   const user = await authGuard();
 
-  const submission = parseWithZod(formData, {
+  const submission = await parseWithZod(formData, {
     schema: insertProfileSchema,
+    async: true,
   });
 
   if (submission.status !== 'success') {

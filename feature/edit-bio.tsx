@@ -1,41 +1,19 @@
 'use client';
 
-import { useState, useEffect } from 'react';
 import { useEditor, EditorContent } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
-import parse from 'html-react-parser';
 import { Extension } from '@tiptap/core';
 import Placeholder from '@tiptap/extension-placeholder';
 import Link from '@tiptap/extension-link';
-import { cn } from '@/lib/utils';
+import dynamic from 'next/dynamic';
 
 interface InlineBioEditorProps {
   initialValue: string;
   onSave: (value: string) => Promise<void>;
-  className?: string;
 }
 
-export function InlineBioEditor({ initialValue, onSave, className }: InlineBioEditorProps) {
-  // const [isEditing, setIsEditing] = useState(false);
-
-  // if (!isEditing) {
-  //   return (
-  //     // biome-ignore lint/a11y/useKeyWithClickEvents: <explanation>
-  //     <div
-  //       onClick={() => setIsEditing(true)}
-  //       className="tiptap cursor-pointer rounded-md p-2 text-slate-800 transition-all duration-300 hover:bg-slate-50"
-  //     >
-  //       {parse(initialValue)}
-  //     </div>
-  //   );
-  // }
-
-  return <EditBlock initialValue={initialValue} onSave={onSave} />;
-}
-
-const EditBlock = ({ initialValue, onSave }: { initialValue: string; onSave: (value: string) => Promise<void> }) => {
+export const InlineBioEditor = ({ initialValue, onSave }: InlineBioEditorProps) => {
   const editor = useEditor({
-    immediatelyRender: true,
     extensions: [
       Extension.create({
         name: 'submit-command',
@@ -78,18 +56,11 @@ const EditBlock = ({ initialValue, onSave }: { initialValue: string; onSave: (va
         await onSave(editor.getHTML());
       }
     },
+    immediatelyRender: false,
   });
 
-  // if (!editor) {
-  //   return (
-  //     <div className="tiptap tiptap ProseMirror prose prose-sm p-2 text-slate-800 transition-all duration-300 hover:bg-slate-50 focus:outline-none">
-  //       {parse(initialValue)}
-  //     </div>
-  //   );
-  // }
-
   return (
-    <div className="tiptap rounded-md p-2 text-slate-800 transition-all duration-300 hover:bg-slate-50">
+    <div className="rounded-md p-2 text-slate-800 transition-all duration-300 hover:bg-slate-50">
       <EditorContent editor={editor} />
     </div>
   );

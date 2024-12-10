@@ -1,4 +1,3 @@
-import { List } from '@/components/list';
 import { db } from '@/db';
 import { profile } from '@/db/schema';
 import { ProfileImageUploader } from '@/feature/upload-image';
@@ -9,10 +8,17 @@ import { InlineEdit } from '@/feature/edit-name';
 import { updateProfileName } from '@/actions/profile.action';
 import { InlineBioEditor } from '@/feature/edit-bio';
 import { updateProfileBio } from '@/actions/profile.action';
+import { LinkDnD } from '@/feature/links/edit-links';
+import { Suspense } from 'react';
 
 const getProfile = async (userId: string) => {
   const data = await db.query.profile.findFirst({
     where: eq(profile.id, userId),
+    with: {
+      links: {
+        orderBy: (links, { asc }) => [asc(links.position)],
+      },
+    },
   });
   return data;
 };
@@ -53,9 +59,19 @@ export default async function DashboardPage() {
           <InlineBioEditor initialValue={data.bio ?? ''} onSave={handleSaveBio} />
         </div>
         <div className="mt-8 w-full">
-          <List />
+          <div className="flex flex-col gap-3">
+            <LinkDnD links={data.links} />
+          </div>
         </div>
       </div>
     </div>
   );
 }
+
+// export default async function () {
+//   return (
+//     <Suspense fallback={<div />}>
+//       <DashboardPage />
+//     </Suspense>
+//   );
+// }

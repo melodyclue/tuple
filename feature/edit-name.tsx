@@ -59,7 +59,7 @@ export function InlineEdit({ value: initialValue, onSave, className }: InlineEdi
           setIsEditing(true);
         }
       }}
-      className="p-2 text-4xl font-bold transition-all duration-300 hover:bg-slate-50"
+      className="block p-2 text-4xl font-bold transition-all duration-300 hover:bg-slate-50"
     >
       {value}
     </h1>

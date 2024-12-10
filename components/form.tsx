@@ -1,7 +1,7 @@
 import { useInputControl } from '@conform-to/react';
 // import { REGEXP_ONLY_DIGITS_AND_CHARS, type OTPInputProps } from "input-otp";
 import type React from 'react';
-import { useId } from 'react';
+import { type JSX, useId } from 'react';
 import { Checkbox, type CheckboxProps } from './ui/checkbox';
 // import {
 //   InputOTP,
@@ -21,7 +21,7 @@ export function ErrorList({ id, errors }: { errors?: ListOfErrors; id?: string }
   return (
     <ul id={id} className="flex flex-col gap-1">
       {errorsToRender.map((e) => (
-        <li key={e} className="text-sm">
+        <li key={e} className="text-sm text-rose-700">
           {e}
         </li>
       ))}
@@ -45,12 +45,13 @@ export function Field({
   const fallbackId = useId();
   const id = inputProps.id ?? fallbackId;
   const errorId = errors?.length ? `${id}-error` : undefined;
+
   return (
     <div className={className}>
       <Label htmlFor={id} {...labelProps} />
       <div className="flex items-center gap-2">
         {prefix ? <div className="text-sm text-slate-600">{prefix}</div> : null}
-        <Input id={id} aria-invalid={errorId ? true : undefined} aria-describedby={errorId} {...inputProps} />
+        <Input key={id} id={id} aria-invalid={errorId ? true : undefined} aria-describedby={errorId} {...inputProps} />
       </div>
 
       {errorId ? (
@@ -223,6 +224,7 @@ export function CheckboxField({
     <div className={className}>
       <div className="flex gap-2">
         <Checkbox
+          key={key}
           {...checkboxProps}
           id={id}
           aria-invalid={errorId ? true : undefined}

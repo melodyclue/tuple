@@ -1,34 +1,19 @@
-import { List } from "@/components/list";
-import { createClient } from "@/utils/supabase/server";
-import { redirect } from "next/navigation";
+import { Suspense } from 'react';
 
 export default async function ProtectedPage() {
-  const supabase = await createClient();
-
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-
-  if (!user) {
-    return redirect("/sign-in");
-  }
-
   return (
-     <div className="p-8">
-      <div className="mx-auto flex w-full max-w-screen-md flex-col items-center justify-center gap-8">
-        <div className="flex w-full flex-col items-center justify-center gap-4">
-          <div className="h-24 w-24 rounded-full bg-orange-200" />
-          <h1 className="text-4xl font-bold">John Doe</h1>
-          <p className="text-slate-500">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
-          </p>
-        </div>
-        <div className="w-full flex-1">
-          <List />
+    <Suspense fallback={<div>Loading...</div>}>
+      <div className="p-8">
+        <div className="mx-auto flex w-full max-w-screen-md flex-col items-center justify-center gap-8">
+          <div className="flex w-full flex-col items-center justify-center gap-4">
+            <div className="h-24 w-24 rounded-full bg-orange-200" />
+            <h1 className="text-4xl font-bold">John Doe</h1>
+            <p className="text-slate-500">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+          </div>
         </div>
       </div>
-    </div>
-  )
+    </Suspense>
+  );
 
   // return (
   //   <div className="flex-1 w-full flex flex-col gap-12">

@@ -1,5 +1,5 @@
 import { boolean, timestamp, pgTable, text, integer, index, uuid, foreignKey, pgEnum } from 'drizzle-orm/pg-core';
-import { relations } from 'drizzle-orm';
+import { type InferSelectModel, relations } from 'drizzle-orm';
 import { authUsers } from 'drizzle-orm/supabase';
 import { LINK_TYPES } from './enum';
 
@@ -38,6 +38,7 @@ export const link = pgTable(
     id: text('id').primaryKey(),
     url: text('url').notNull(),
     type: linkTypes('type').notNull(),
+    title: text('title').notNull(),
     active: boolean('active').notNull().default(true),
     position: integer('position').notNull(),
     userId: uuid('userId').notNull(),
@@ -63,3 +64,5 @@ export const linkRelations = relations(link, ({ one }) => ({
     references: [profile.id],
   }),
 }));
+
+export type SelectLink = InferSelectModel<typeof link>;
