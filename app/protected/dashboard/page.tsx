@@ -1,5 +1,5 @@
 import { db } from '@/db';
-import { profile } from '@/db/schema';
+import { link, profile } from '@/db/schema';
 import { ProfileImageUploader } from '@/feature/upload-image';
 import { createClient } from '@/utils/supabase/server';
 import { eq } from 'drizzle-orm';
@@ -9,6 +9,7 @@ import { updateProfileName } from '@/actions/profile.action';
 import { InlineBioEditor } from '@/feature/edit-bio';
 import { updateProfileBio } from '@/actions/profile.action';
 import { LinkDnD } from '@/feature/links/edit-links';
+import { AddLinkButton } from '@/feature/links/add-link';
 import { Suspense } from 'react';
 
 const getProfile = async (userId: string) => {
@@ -16,6 +17,7 @@ const getProfile = async (userId: string) => {
     where: eq(profile.id, userId),
     with: {
       links: {
+        where: eq(link.userId, userId),
         orderBy: (links, { asc }) => [asc(links.position)],
       },
     },
@@ -60,18 +62,15 @@ export default async function DashboardPage() {
         </div>
         <div className="mt-8 w-full">
           <div className="flex flex-col gap-3">
-            <LinkDnD links={data.links} />
+            <div className="flex items-center justify-end">
+              <AddLinkButton />
+            </div>
+            <Suspense fallback={<div>Loading...</div>}>
+              <LinkDnD links={data.links} />
+            </Suspense>
           </div>
         </div>
       </div>
     </div>
   );
 }
-
-// export default async function () {
-//   return (
-//     <Suspense fallback={<div />}>
-//       <DashboardPage />
-//     </Suspense>
-//   );
-// }

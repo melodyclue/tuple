@@ -41,6 +41,8 @@ export function InlineEdit({ value: initialValue, onSave, className }: InlineEdi
   if (isEditing) {
     return (
       <Input
+        spellCheck={false}
+        autoComplete="off"
         ref={inputRef}
         value={value}
         onChange={(e) => setValue(e.target.value)}

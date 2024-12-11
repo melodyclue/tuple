@@ -6,8 +6,8 @@ import { hasEnvVars } from '@/utils/supabase/check-env-vars';
 import { GeistSans } from 'geist/font/sans';
 import { ThemeProvider } from 'next-themes';
 import Link from 'next/link';
+import { NuqsAdapter } from 'nuqs/adapters/next/app';
 import './globals.css';
-import { Suspense } from 'react';
 
 const defaultUrl = process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 'http://localhost:3000';
 
@@ -34,7 +34,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 {!hasEnvVars ? <EnvVarWarning /> : <HeaderAuth />}
               </div>
             </nav>
-            <div className="p-5">{children}</div>
+            <div className="p-5">
+              <NuqsAdapter>{children}</NuqsAdapter>
+            </div>
 
             <footer className="mx-auto flex w-full items-center justify-center gap-8 border-t py-4 text-center text-xs">
               <p>

@@ -1,5 +1,5 @@
 import type { LinkType } from '@/db/enum';
-import { faEnvelope, faGlobe, type IconDefinition } from '@fortawesome/free-solid-svg-icons';
+import { faEnvelope, faGlobe, faLink, type IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import {
   faInstagram,
   faFacebook,
@@ -38,4 +38,19 @@ export const LinkBaseUrlMap: LinkBaseUrlMapProps = {
   youtube: 'https://www.youtube.com/@',
   linkedin: 'https://www.linkedin.com/',
   tiktok: 'https://www.tiktok.com/@',
+};
+
+type LinkIconMapProps = {
+  [key in LinkType]: IconDefinition;
+};
+
+export const LinkIconMap: LinkIconMapProps = {
+  website: faLink,
+  email: faEnvelope,
+  x: faXTwitter,
+  instagram: faInstagram,
+  facebook: faFacebook,
+  youtube: faYoutube,
+  linkedin: faLinkedin,
+  tiktok: faTiktok,
 };

@@ -1,25 +1,25 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
 import {
-  type Dispatch,
-  type SetStateAction,
-  useCallback,
-  useState,
-  useEffect,
-  useActionState,
-  startTransition,
-} from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
-import { Button } from '@/components/ui/button';
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogOverlay,
+  DialogTitle,
+} from '@/components/ui/dialog';
+import { LinkBaseUrlMap, LinkIconMap, type LinkOption, LinkOptions } from '@/feature/links';
+import type { SelectLink } from '@/db/schema';
+import { startTransition, useActionState, useEffect, useState } from 'react';
+import { insertNewLink, updateLink } from '@/actions/profile.action';
+import { addLinkSchema, type addLinkSchemaProps, editLinkSchema, type editLinkSchemaProps } from '@/utils/validation';
+import { getInputProps, useForm } from '@conform-to/react';
 import { getZodConstraint, parseWithZod } from '@conform-to/zod';
-import { getFormProps, getInputProps, useForm } from '@conform-to/react';
+import { faChevronLeft, faChevronRight, faLink } from '@fortawesome/free-solid-svg-icons';
 import { ErrorList, Field } from '@/components/form';
-import { addLinkSchema, type addLinkSchemaProps } from '@/utils/validation';
-import { Dialog, DialogContent, DialogHeader, DialogOverlay, DialogTitle } from '@/components/ui/dialog';
-import { LinkOptions, type LinkOption } from './index';
-import { insertNewLink } from '@/actions/profile.action';
 import { SubmitButton } from '@/components/submit-button';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 function LinkSelection({ onSelect }: { onSelect: (option: LinkOption) => void }) {
   return (
@@ -49,15 +49,8 @@ function LinkSelection({ onSelect }: { onSelect: (option: LinkOption) => void })
   );
 }
 
-function LinkInput({
-  selectedLink,
-  onBack,
-  onClose,
-}: {
-  selectedLink: LinkOption;
-  onBack: () => void;
-  onClose: Dispatch<SetStateAction<boolean>>;
-}) {
+function LinkInput({ selectedLink, onBack }: { selectedLink: LinkOption; onBack: () => void }) {
+  const router = useRouter();
   const [lastResult, action] = useActionState(insertNewLink, undefined);
   const [form, fields] = useForm<addLinkSchemaProps>({
     id: 'add-link',
@@ -81,9 +74,9 @@ function LinkInput({
 
   useEffect(() => {
     if (lastResult?.result?.status === 'success') {
-      onClose(false);
+      router.back();
     }
-  }, [lastResult, onClose]);
+  }, [lastResult, router]);
 
   return (
     <>
@@ -140,13 +133,8 @@ function LinkInput({
   );
 }
 
-function SelectLinkModal({
-  showSelectLinkModal,
-  setShowSelectLinkModal,
-}: {
-  showSelectLinkModal: boolean;
-  setShowSelectLinkModal: Dispatch<SetStateAction<boolean>>;
-}) {
+export function AddLinkModal() {
+  const router = useRouter();
   const [selectedLink, setSelectedLink] = useState<LinkOption | null>(null);
 
   const handleLinkSelect = (option: LinkOption) => {
@@ -158,29 +146,23 @@ function SelectLinkModal({
   };
 
   return (
-    <Dialog open={showSelectLinkModal} onOpenChange={setShowSelectLinkModal}>
+    <Dialog
+      modal
+      open
+      onOpenChange={(open) => {
+        if (!open) {
+          router.back();
+        }
+      }}
+    >
       <DialogOverlay />
-      <DialogContent className="w-full max-w-xl p-8">
+      <DialogContent className="z-50 w-full max-w-xl p-8">
         {selectedLink ? (
-          <LinkInput selectedLink={selectedLink} onBack={handleBack} onClose={setShowSelectLinkModal} />
+          <LinkInput selectedLink={selectedLink} onBack={handleBack} />
         ) : (
           <LinkSelection onSelect={handleLinkSelect} />
         )}
       </DialogContent>
     </Dialog>
   );
-}
-
-export function useSelectLinkModal() {
-  const [showSelectLinkModal, setShowSelectLinkModal] = useState(false);
-
-  const SelectLinkModalCallback = useCallback(
-    () => <SelectLinkModal showSelectLinkModal={showSelectLinkModal} setShowSelectLinkModal={setShowSelectLinkModal} />,
-    [showSelectLinkModal],
-  );
-
-  return {
-    setShowSelectLinkModal,
-    SelectLinkModal: SelectLinkModalCallback,
-  };
 }

@@ -29,6 +29,7 @@ export type updateLinkSchemaProps = z.infer<typeof updateLinkSchema>;
 export const editLinkSchema = z.object({
   id: z.string(),
   url: z.string(),
+  title: z.string(),
 });
 export type editLinkSchemaProps = z.infer<typeof editLinkSchema>;
 

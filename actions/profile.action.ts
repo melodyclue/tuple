@@ -11,6 +11,7 @@ import { addLinkSchema, deleteLinkSchema, editLinkSchema, updateLinkSchema } fro
 import { LinkBaseUrlMap } from '@/feature/links';
 import { createId } from '@paralleldrive/cuid2';
 import type { SubmissionResult } from '@conform-to/react';
+import { redirect } from 'next/navigation';
 
 export async function updateProfileName(userId: string, name: string) {
   await authGuard();
@@ -56,7 +57,7 @@ export async function insertNewLink(prevState: unknown, formData: FormData) {
 
   // 選択されたリンクタイプに対応するbaseUrlを取得
   const linkBaseUrl = LinkBaseUrlMap[type];
-  if (!linkBaseUrl) {
+  if (linkBaseUrl === undefined) {
     return {
       result: submission.reply({
         formErrors: ['Invalid link type'],
@@ -99,7 +100,7 @@ export async function deleteLink(prevState: unknown, formData: FormData) {
   });
 
   if (submission.status !== 'success') {
-    return { result: submission.reply() };
+    return { result: submission.reply(), status: 'error' };
   }
 
   const { id } = submission.value;
@@ -107,7 +108,7 @@ export async function deleteLink(prevState: unknown, formData: FormData) {
   await db.delete(link).where(eq(link.id, id));
 
   revalidatePath('/protected/dashboard');
-  return { result: submission.reply() };
+  return { result: submission.reply(), status: 'success' };
 }
 
 export async function updateLink(prevState: unknown, formData: FormData) {
@@ -119,15 +120,15 @@ export async function updateLink(prevState: unknown, formData: FormData) {
   });
 
   if (submission.status !== 'success') {
-    return { result: submission.reply() };
+    return { result: submission.reply(), status: 'error' };
   }
 
-  const { id, url } = submission.value;
+  const { id, url, title } = submission.value;
 
-  await db.update(link).set({ url }).where(eq(link.id, id));
+  await db.update(link).set({ url, title }).where(eq(link.id, id));
 
   revalidatePath('/protected/dashboard');
-  return { result: submission.reply() };
+  return { result: submission.reply(), status: 'success' };
 }
 
 export async function updateLinkPosition(
@@ -146,6 +147,10 @@ export async function updateLinkPosition(
   }
 
   const { ids } = submission.value;
+
+  if (ids.length === 0) {
+    return { result: submission.reply(), links: [] };
+  }
 
   const sqlChunks: SQL[] = [];
   sqlChunks.push(sql`(case`);
