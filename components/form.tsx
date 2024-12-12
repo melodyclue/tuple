@@ -37,7 +37,9 @@ export function Field({
   prefix,
 }: {
   labelProps: React.LabelHTMLAttributes<HTMLLabelElement>;
-  inputProps: React.InputHTMLAttributes<HTMLInputElement>;
+  inputProps: React.InputHTMLAttributes<HTMLInputElement> & {
+    key?: string;
+  };
   errors?: ListOfErrors;
   className?: string;
   prefix?: string;
@@ -46,12 +48,13 @@ export function Field({
   const id = inputProps.id ?? fallbackId;
   const errorId = errors?.length ? `${id}-error` : undefined;
 
+  const { key, ...rest } = inputProps;
   return (
     <div className={className}>
       <Label htmlFor={id} {...labelProps} />
       <div className="flex items-center gap-2">
         {prefix ? <div className="text-sm text-slate-600">{prefix}</div> : null}
-        <Input key={id} id={id} aria-invalid={errorId ? true : undefined} aria-describedby={errorId} {...inputProps} />
+        <Input key={id} id={id} aria-invalid={errorId ? true : undefined} aria-describedby={errorId} {...rest} />
       </div>
 
       {errorId ? (
@@ -97,13 +100,16 @@ export function FieldWithPrefix({
 }: {
   prefix: string;
   labelProps: React.LabelHTMLAttributes<HTMLLabelElement>;
-  inputProps: React.InputHTMLAttributes<HTMLInputElement>;
+  inputProps: React.InputHTMLAttributes<HTMLInputElement> & {
+    key?: string;
+  };
   errors?: ListOfErrors;
   className?: string;
 }) {
   const fallbackId = useId();
   const id = inputProps.id ?? fallbackId;
   const errorId = errors?.length ? `${id}-error` : undefined;
+  const { key, ...rest } = inputProps;
   return (
     <div className={className}>
       <Label htmlFor={id} {...labelProps} className="mb-1 block tracking-wide text-slate-800" />
@@ -111,9 +117,10 @@ export function FieldWithPrefix({
         <div className="mr-1 flex items-center bg-slate-100 px-2 text-sm tracking-wide text-slate-700">{prefix}</div>
         <Input
           id={id}
+          key={key}
           aria-invalid={errorId ? true : undefined}
           aria-describedby={errorId}
-          {...inputProps}
+          {...rest}
           className="w-full border-none"
         />
       </div>

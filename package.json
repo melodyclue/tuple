@@ -1,4 +1,6 @@
 {
+  "name": "tuple",
+  "author": "melodyclue",
   "private": true,
   "scripts": {
     "dev": "next dev",

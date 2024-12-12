@@ -1,11 +1,17 @@
 import { LINK_TYPES } from '@/db/enum';
 import { z } from 'zod';
 
-export const insertProfileSchema = z.object({
-  name: z.string().min(1).max(20),
-  username: z.string().min(1).max(20),
+export const createProfileSchema = z.object({
+  name: z.string().min(3).max(30),
+  username: z.string().min(3).max(30),
 });
-export type insertProfileSchemaType = z.infer<typeof insertProfileSchema>;
+export type createProfileSchemaType = z.infer<typeof createProfileSchema>;
+
+export const updateProfileSchema = z.object({
+  name: z.string().min(3).max(30),
+  username: z.string().min(3).max(30),
+});
+export type updateProfileSchemaType = z.infer<typeof updateProfileSchema>;
 
 export const uploadSchema = z.object({
   file: z.instanceof(File, { message: 'File is required' }),

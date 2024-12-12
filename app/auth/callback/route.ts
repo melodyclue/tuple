@@ -44,7 +44,7 @@ export async function GET(request: Request) {
   if (user) {
     const profile = await getProfile(user.id);
     if (!profile) {
-      // redirect to onboarding
+      // redirect to complete onboarding
       return NextResponse.redirect(`${origin}/onboard`);
     }
 

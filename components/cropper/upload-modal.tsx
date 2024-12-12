@@ -1,14 +1,7 @@
 'use client';
 
-import { type Dispatch, type SetStateAction, useCallback, useEffect, useMemo, useState } from 'react';
-import {
-  Dialog,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogContent,
-  DialogOverlay,
-} from '@/components/ui/dialog';
+import { type Dispatch, type SetStateAction, useCallback, useMemo, useState } from 'react';
+import { Dialog, DialogHeader, DialogTitle, DialogContent, DialogOverlay } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { getCroppedImg } from './cropImage';
 import Cropper, { type Area, type MediaSize } from 'react-easy-crop';
@@ -33,24 +26,18 @@ function UploadImageModal({
   imgSrc: ImageSource;
 }) {
   const [crop, setCrop] = useState({ x: 0, y: 0 });
-  /** 画像の拡大縮小倍率 */
+  /** info zoom */
   const [zoom, setZoom] = useState(1); // 1 - 0.4
-  /** 画像拡大縮小の最小値 */
+  /** info minZoom */
   const [minZoom, setMinZoom] = useState(1);
-  /** 切り取る領域の情報 */
+  /** info cropped area */
   const [croppedAreaPixels, setCroppedAreaPixels] = useState<Area>();
 
-  const [isUploading, setIsUploading] = useState(false);
-  /**
-   * 切り取り完了後、切り取り領域の情報をセット
-   */
+  const [_, setIsUploading] = useState(false);
+
   const onCropComplete = useCallback((croppedArea: Area, croppedAreaPixels: Area) => {
     setCroppedAreaPixels(croppedAreaPixels);
   }, []);
-
-  /**
-   * 切り取り後の画像を生成し画面に表示
-   */
 
   const showCroppedImage = useCallback(async () => {
     if (!croppedAreaPixels || !imgSrc) return;

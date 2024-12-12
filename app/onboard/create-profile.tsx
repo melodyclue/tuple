@@ -7,20 +7,20 @@ import { useActionState } from 'react';
 import { parseWithZod } from '@conform-to/zod';
 import { Field, FieldWithPrefix } from '@/components/form';
 import { z } from 'zod';
-import { insertNewProfile } from '@/actions/onboard.action';
-import type { insertProfileSchemaType } from '@/utils/validation';
+import { createProfile } from '@/actions/settings.action';
+import { createProfileSchema, type createProfileSchemaType } from '@/utils/validation';
 
 const insertProfileSchema = z.object({
   name: z.string().min(1).max(20),
   username: z.string().min(1).max(20),
 });
 
-export default function OnboardPage() {
-  const [lastResult, action] = useActionState(insertNewProfile, undefined);
+export const CreateProfile = () => {
+  const [lastResult, action] = useActionState(createProfile, undefined);
 
-  const [form, fields] = useForm<insertProfileSchemaType>({
+  const [form, fields] = useForm<createProfileSchemaType>({
     id: 'edit-name',
-    constraint: getZodConstraint(insertProfileSchema),
+    constraint: getZodConstraint(createProfileSchema),
     lastResult,
     defaultValue: {
       name: '',
@@ -73,4 +73,4 @@ export default function OnboardPage() {
       </form>
     </div>
   );
-}
+};
