@@ -17,14 +17,21 @@ const getProfile = async (username: string) => {
   return data;
 };
 
-export default async function DashboardPage({ params }: { params: { username: string } }) {
+type Params = {
+  username: string;
+};
+
+const DashboardPage: React.FC<{
+  params: Promise<Params>;
+}> = async ({ params }) => {
+  const { username } = await params;
   const supabase = await createClient();
 
   const {
     data: { user },
   } = await supabase.auth.getUser();
 
-  const data = await getProfile(params.username);
+  const data = await getProfile(username);
 
   if (!data) {
     return <div>This profile does not exist</div>;
@@ -40,4 +47,6 @@ export default async function DashboardPage({ params }: { params: { username: st
   }
   // if the profile belongs to the user, then display the edit profile page
   return <EditProfile data={data} userId={user.id} />;
-}
+};
+
+export default DashboardPage;

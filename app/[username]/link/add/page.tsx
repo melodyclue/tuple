@@ -1,4 +1,4 @@
-import { AddLinkModal } from '@/app/protected/@modal/(.)dashboard/link/add/addLinkModal';
+import { AddLinkModal } from '@/app/[username]/@modal/(.)link/add/addLinkModal';
 
 export default async function Page() {
   return <AddLinkModal />;
