@@ -3,7 +3,7 @@
 import { SubmitButton } from '@/components/submit-button';
 import { getZodConstraint } from '@conform-to/zod';
 import { getInputProps, useForm } from '@conform-to/react';
-import { useActionState } from 'react';
+import { startTransition, useActionState } from 'react';
 import { parseWithZod } from '@conform-to/zod';
 import { Field, FieldWithPrefix } from '@/components/form';
 import { z } from 'zod';
@@ -21,10 +21,16 @@ export const CreateProfile = () => {
   const [form, fields] = useForm<createProfileSchemaType>({
     id: 'edit-name',
     constraint: getZodConstraint(createProfileSchema),
-    lastResult,
+    lastResult: lastResult?.result,
     defaultValue: {
       name: '',
       username: '',
+    },
+    onSubmit(event, { formData }) {
+      event.preventDefault();
+      startTransition(() => {
+        action(formData);
+      });
     },
     onValidate({ formData }) {
       return parseWithZod(formData, { schema: insertProfileSchema });

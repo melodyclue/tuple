@@ -8,6 +8,7 @@ import { authGuard } from '@/utils/auth-guard';
 import { createProfileSchema, updateProfileSchema } from '@/utils/validation';
 import { and, eq, ne } from 'drizzle-orm';
 import { z } from 'zod';
+import { revalidatePath } from 'next/cache';
 
 export async function createProfile(prevState: unknown, formData: FormData) {
   const user = await authGuard();
@@ -31,7 +32,7 @@ export async function createProfile(prevState: unknown, formData: FormData) {
   });
 
   if (submission.status !== 'success') {
-    return submission.reply();
+    return { result: submission.reply() };
   }
 
   const { name, username } = submission.value;
@@ -42,6 +43,7 @@ export async function createProfile(prevState: unknown, formData: FormData) {
     username,
   });
 
+  revalidatePath(`/settings`);
   redirect(`/${username}`);
 }
 
@@ -54,6 +56,7 @@ export async function updatProfile(prevState: unknown, formData: FormData) {
         .select()
         .from(profile)
         .where(and(eq(profile.username, data.username), ne(profile.id, user.id)));
+
       if (existingProfile.length > 0) {
         ctx.addIssue({
           code: z.ZodIssueCode.custom,
@@ -70,15 +73,15 @@ export async function updatProfile(prevState: unknown, formData: FormData) {
     return { result: submission.reply() };
   }
 
-  const { name, username } = submission.value;
+  const { username } = submission.value;
 
   await db
     .update(profile)
     .set({
-      name,
       username,
     })
     .where(eq(profile.id, user.id));
 
+  revalidatePath(`/settings`);
   return { result: submission.reply() };
 }

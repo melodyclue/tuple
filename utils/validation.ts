@@ -8,7 +8,7 @@ export const createProfileSchema = z.object({
 export type createProfileSchemaType = z.infer<typeof createProfileSchema>;
 
 export const updateProfileSchema = z.object({
-  name: z.string().min(3).max(30),
+  // name: z.string().min(3).max(30),
   username: z.string().min(3).max(30),
 });
 export type updateProfileSchemaType = z.infer<typeof updateProfileSchema>;
