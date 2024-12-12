@@ -49,6 +49,7 @@ export const UpdateProfile = ({ username, name }: UpdateProfileProps) => {
           <h2 className="text-2xl font-bold">Update your profile</h2>
           <div className="flex w-full flex-col justify-between gap-5">
             <FieldWithPrefix
+              data1pIgnore={true}
               prefix="tuple.link/"
               className="w-full"
               labelProps={{
@@ -59,6 +60,7 @@ export const UpdateProfile = ({ username, name }: UpdateProfileProps) => {
                 className: 'bg-slate-50 w-full',
                 placeholder: 'Enter your username',
                 autoComplete: 'off',
+                spellCheck: 'false',
               }}
               errors={fields.username.errors}
             />

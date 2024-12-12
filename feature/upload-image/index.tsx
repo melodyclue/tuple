@@ -46,7 +46,7 @@ export const ProfileImageUploader = ({ imageUrl, slug }: { imageUrl: string | nu
           {/* biome-ignore lint/a11y/useKeyWithClickEvents: <explanation> */}
           <div
             onClick={() => ref.current?.click()}
-            className="h-24 w-24 cursor-pointer overflow-hidden rounded-full border border-orange-200 bg-orange-100"
+            className="h-24 w-24 cursor-pointer overflow-hidden rounded-full border"
           >
             <Image src={imageUrl} alt={slug} className="h-full w-full object-cover" width={100} height={100} />
           </div>

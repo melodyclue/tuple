@@ -35,6 +35,7 @@ export function Field({
   errors,
   className,
   prefix,
+  data1pIgnore = false,
 }: {
   labelProps: React.LabelHTMLAttributes<HTMLLabelElement>;
   inputProps: React.InputHTMLAttributes<HTMLInputElement> & {
@@ -43,6 +44,7 @@ export function Field({
   errors?: ListOfErrors;
   className?: string;
   prefix?: string;
+  data1pIgnore?: boolean;
 }) {
   const fallbackId = useId();
   const id = inputProps.id ?? fallbackId;
@@ -54,7 +56,14 @@ export function Field({
       <Label htmlFor={id} {...labelProps} />
       <div className="flex items-center gap-2">
         {prefix ? <div className="text-sm text-slate-600">{prefix}</div> : null}
-        <Input key={id} id={id} aria-invalid={errorId ? true : undefined} aria-describedby={errorId} {...rest} />
+        <Input
+          key={id}
+          id={id}
+          aria-invalid={errorId ? true : undefined}
+          aria-describedby={errorId}
+          {...rest}
+          data-1p-ignore={data1pIgnore}
+        />
       </div>
 
       {errorId ? (
@@ -97,6 +106,7 @@ export function FieldWithPrefix({
   inputProps,
   errors,
   className,
+  data1pIgnore = false,
 }: {
   prefix: string;
   labelProps: React.LabelHTMLAttributes<HTMLLabelElement>;
@@ -105,6 +115,7 @@ export function FieldWithPrefix({
   };
   errors?: ListOfErrors;
   className?: string;
+  data1pIgnore?: boolean;
 }) {
   const fallbackId = useId();
   const id = inputProps.id ?? fallbackId;
@@ -122,6 +133,7 @@ export function FieldWithPrefix({
           aria-describedby={errorId}
           {...rest}
           className="w-full border-none"
+          data-1p-ignore={data1pIgnore}
         />
       </div>
       {errorId ? (

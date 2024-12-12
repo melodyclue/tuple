@@ -12,7 +12,7 @@ export const PublicProfile = ({ data }: { data: SelectProfile & { links: SelectL
           <div>
             {data.imageUrl ? (
               <div className="flex items-end gap-3">
-                <div className="h-24 w-24 overflow-hidden rounded-full border border-orange-200 bg-orange-100">
+                <div className="h-24 w-24 overflow-hidden rounded-full border">
                   <Image
                     src={data.imageUrl}
                     alt={data.username}

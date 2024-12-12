@@ -54,11 +54,14 @@ export const CreateProfile = () => {
                 className: 'bg-slate-50 w-full',
                 placeholder: 'Enter your name',
                 autoComplete: 'off',
+                spellCheck: 'false',
               }}
               errors={fields.name.errors}
+              data-1p-ignore
             />
 
             <FieldWithPrefix
+              data1pIgnore={true}
               prefix="tuple.link/"
               className="w-full"
               labelProps={{
@@ -69,6 +72,7 @@ export const CreateProfile = () => {
                 className: 'bg-slate-50 w-full',
                 placeholder: 'Enter username ',
                 autoComplete: 'off',
+                spellCheck: 'false',
               }}
               errors={fields.username.errors}
             />

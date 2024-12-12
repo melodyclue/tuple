@@ -4,6 +4,7 @@ import { createClient } from '@/utils/supabase/server';
 import { eq } from 'drizzle-orm';
 import { EditProfile } from './edit-profile';
 import { PublicProfile } from './public-profile';
+import { Header } from '@/components/header';
 
 const getProfile = async (username: string) => {
   const data = await db.query.profile.findFirst({
@@ -46,7 +47,12 @@ const DashboardPage: React.FC<{
     return <div>This profile does not belong to you, so just display it</div>;
   }
   // if the profile belongs to the user, then display the edit profile page
-  return <EditProfile data={data} userId={user.id} />;
+  return (
+    <>
+      <Header />
+      <EditProfile data={data} userId={user.id} />
+    </>
+  );
 };
 
 export default DashboardPage;

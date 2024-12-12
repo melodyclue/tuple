@@ -1,6 +1,4 @@
 import { signInWithOAuthAction, signOutAction } from '@/app/actions';
-import { hasEnvVars } from '@/utils/supabase/check-env-vars';
-import { Badge } from './ui/badge';
 import { createClient } from '@/utils/supabase/server';
 import { SubmitButton } from './submit-button';
 import {
@@ -15,26 +13,27 @@ import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
 
-export default async function AuthButton() {
+export const Header = async () => {
+  return (
+    <nav className="flex h-16 w-full justify-center border-b border-b-foreground/10">
+      <div className="flex w-full max-w-5xl items-center justify-between p-3 px-5 text-sm">
+        <div className="flex items-center gap-5 font-semibold">
+          <Link href="/" className="text-xl">
+            Tuple
+          </Link>
+        </div>
+        <HeaderAuth />
+      </div>
+    </nav>
+  );
+};
+
+const HeaderAuth = async () => {
   const supabase = await createClient();
 
   const {
     data: { user },
   } = await supabase.auth.getUser();
-
-  if (!hasEnvVars) {
-    return (
-      <>
-        <div className="flex items-center gap-4">
-          <div>
-            <Badge variant="default" className="pointer-events-none font-normal">
-              Please update .env.local file with anon key and url
-            </Badge>
-          </div>
-        </div>
-      </>
-    );
-  }
 
   return user ? (
     <UserDropdown userId={user.id} />
@@ -49,7 +48,7 @@ export default async function AuthButton() {
       </form>
     </div>
   );
-}
+};
 
 const UserDropdown = async ({ userId }: { userId: string }) => {
   const profile = await getProfile(userId);
