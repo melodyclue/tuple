@@ -38,20 +38,15 @@ const DashboardPage: React.FC<{
     return <div>This profile does not exist</div>;
   }
 
-  if (!user) {
-    // not logged in
-    return <PublicProfile data={data} />;
-  }
+  const isOwner = user && data.id === user.id;
 
-  if (data.id !== user.id) {
-    return <div>This profile does not belong to you, so just display it</div>;
-  }
-  // if the profile belongs to the user, then display the edit profile page
-  return (
+  return isOwner ? (
     <>
       <Header />
       <EditProfile data={data} userId={user.id} />
     </>
+  ) : (
+    <PublicProfile data={data} />
   );
 };
 
