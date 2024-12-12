@@ -14,20 +14,19 @@ import { useId, useActionState, useOptimistic, useTransition, useEffect, useStat
 import type { SelectLink } from '@/db/schema';
 import { updateLinkPosition } from '@/actions/profile.action';
 import { SortableItem } from './link-item';
-import { useFormStatus } from 'react-dom';
 
 export const LinkDnD = ({ links }: { links: SelectLink[] }) => {
   const id = useId();
   const [, startTransition] = useTransition();
-  const [result, updatePosition] = useActionState(updateLinkPosition, {
+  const [displayItems, setItems] = useState(links);
+  const [_, updatePosition] = useActionState(updateLinkPosition, {
     result: {},
     links,
   });
 
-  const [displayItems, updateOptimistic] = useOptimistic(
-    result.links,
-    (state, optimisticValue: SelectLink[]) => optimisticValue,
-  );
+  useEffect(() => {
+    setItems(links);
+  }, [links]);
 
   const sensors = useSensors(
     useSensor(PointerSensor),
@@ -39,14 +38,13 @@ export const LinkDnD = ({ links }: { links: SelectLink[] }) => {
   async function handleDragEnd(event: DragEndEvent) {
     const { active, over } = event;
 
+    const oldIndex = displayItems.findIndex((item) => item.id === active.id);
+    const newIndex = displayItems.findIndex((item) => item.id === over?.id);
+    const newItems = arrayMove(displayItems, oldIndex, newIndex);
+    setItems(newItems);
+
     if (active.id !== over?.id) {
       startTransition(() => {
-        const oldIndex = displayItems.findIndex((item) => item.id === active.id);
-        const newIndex = displayItems.findIndex((item) => item.id === over?.id);
-        const newItems = arrayMove(displayItems, oldIndex, newIndex);
-
-        updateOptimistic(newItems);
-
         const formData = new FormData();
         newItems.forEach((item, index) => {
           formData.append(`ids[${index}]`, item.id);

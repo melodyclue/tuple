@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { Suspense } from 'react';
 
 export default async function ProtectedPage() {
@@ -7,7 +8,9 @@ export default async function ProtectedPage() {
         <div className="mx-auto flex w-full max-w-screen-md flex-col items-center justify-center gap-8">
           <div className="flex w-full flex-col items-center justify-center gap-4">
             <div className="h-24 w-24 rounded-full bg-orange-200" />
-            <h1 className="text-4xl font-bold">John Doe</h1>
+            <Link href="/protected/dashboard">
+              <h1 className="text-4xl font-bold">John Doe</h1>
+            </Link>
             <p className="text-slate-500">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
           </div>
         </div>

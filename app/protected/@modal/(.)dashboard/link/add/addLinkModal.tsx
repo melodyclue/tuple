@@ -71,7 +71,7 @@ function LinkInput({ selectedLink, onBack }: { selectedLink: LinkOption; onBack:
     },
     shouldRevalidate: 'onInput',
   });
-
+  console.log(lastResult);
   useEffect(() => {
     if (lastResult?.result?.status === 'success') {
       router.back();

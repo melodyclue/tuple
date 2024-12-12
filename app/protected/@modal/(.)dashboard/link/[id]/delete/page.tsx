@@ -2,7 +2,7 @@ import { eq } from 'drizzle-orm';
 import { DeleteLinkModal } from './deleteLinkModal';
 import { db } from '@/db';
 import { link } from '@/db/schema';
-import { ClientRedirect } from './client-redirect';
+import { redirect, RedirectType } from 'next/navigation';
 
 const getLinkById = async (id: string) => {
   const data = await db.query.link.findFirst({
@@ -15,7 +15,7 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
   const { id } = await params;
   const link = await getLinkById(id);
 
-  if (!link) return <ClientRedirect />;
+  // if (!link) return null;
 
   return <DeleteLinkModal link={link} />;
 }

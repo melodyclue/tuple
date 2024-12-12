@@ -167,7 +167,7 @@ export async function updateLinkPosition(
     .set({ position: sql`CAST(${finalSql} AS integer)` }) // Cast CASE to integer
     .where(and(inArray(link.id, ids), eq(link.userId, user.id)));
 
-  // revalidatePath('/protected/dashboard');
+  revalidatePath('/protected/dashboard');
 
   const links = await db.query.link.findMany({
     where: eq(link.userId, user.id),

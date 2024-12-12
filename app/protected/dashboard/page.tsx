@@ -52,6 +52,7 @@ export default async function DashboardPage() {
     await updateProfileBio(user.id, newBio);
   };
 
+  console.log('data', data);
   return (
     <div className="motion-safe:animate-fadeInSlow p-8">
       <div className="mx-auto w-full max-w-screen-md">
@@ -60,14 +61,13 @@ export default async function DashboardPage() {
           <InlineEdit value={data.name} onSave={handleSaveName} />
           <InlineBioEditor initialValue={data.bio ?? ''} onSave={handleSaveBio} />
         </div>
+        {/* {JSON.stringify(data.links)} */}
         <div className="mt-8 w-full">
           <div className="flex flex-col gap-3">
             <div className="flex items-center justify-end">
               <AddLinkButton />
             </div>
-            <Suspense fallback={<div>Loading...</div>}>
-              <LinkDnD links={data.links} />
-            </Suspense>
+            <LinkDnD links={data.links} />
           </div>
         </div>
       </div>
