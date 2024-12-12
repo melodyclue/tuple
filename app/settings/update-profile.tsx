@@ -37,7 +37,7 @@ export const UpdateProfile = ({ username, name }: UpdateProfileProps) => {
       });
     },
     onValidate({ formData }) {
-      return parseWithZod(formData, { schema: insertProfileSchema });
+      return parseWithZod(formData, { schema: updateProfileSchema });
     },
     shouldRevalidate: 'onInput',
   });
