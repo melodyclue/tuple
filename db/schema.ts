@@ -28,6 +28,8 @@ export const profile = pgTable(
   ],
 ).enableRLS();
 
+export type SelectProfile = InferSelectModel<typeof profile>;
+
 export const profileRelations = relations(profile, ({ many }) => ({
   links: many(link),
 }));

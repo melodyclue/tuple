@@ -11,7 +11,6 @@ import { addLinkSchema, deleteLinkSchema, editLinkSchema, updateLinkSchema } fro
 import { LinkBaseUrlMap } from '@/feature/links';
 import { createId } from '@paralleldrive/cuid2';
 import type { SubmissionResult } from '@conform-to/react';
-import { redirect } from 'next/navigation';
 
 export async function updateProfileName(userId: string, name: string) {
   await authGuard();

@@ -1,21 +1,20 @@
-import { eq } from 'drizzle-orm';
+import { and, eq } from 'drizzle-orm';
 import { DeleteLinkModal } from './deleteLinkModal';
 import { db } from '@/db';
 import { link } from '@/db/schema';
-import { redirect, RedirectType } from 'next/navigation';
+import { authGuard } from '@/utils/auth-guard';
 
-const getLinkById = async (id: string) => {
+const getLinkById = async (id: string, userId: string) => {
   const data = await db.query.link.findFirst({
-    where: eq(link.id, id),
+    where: and(eq(link.id, id), eq(link.userId, userId)),
   });
   return data;
 };
 
 export default async function Page({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
-  const link = await getLinkById(id);
-
-  // if (!link) return null;
+  const user = await authGuard();
+  const link = await getLinkById(id, user.id);
 
   return <DeleteLinkModal link={link} />;
 }

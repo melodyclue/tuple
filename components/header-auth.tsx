@@ -3,10 +3,15 @@ import { hasEnvVars } from '@/utils/supabase/check-env-vars';
 import Link from 'next/link';
 import { Badge } from './ui/badge';
 import { Button } from './ui/button';
-import { authGuard } from '@/utils/auth-guard';
+import { createClient } from '@/utils/supabase/server';
 
 export default async function AuthButton() {
-  const user = await authGuard();
+  const supabase = await createClient();
+
+  const {
+    data: { user },
+    error,
+  } = await supabase.auth.getUser();
 
   if (!hasEnvVars) {
     return (

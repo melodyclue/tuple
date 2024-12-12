@@ -1,58 +1,29 @@
-import { db } from '@/db';
-import { link, profile } from '@/db/schema';
+import type { SelectLink, SelectProfile } from '@/db/schema';
 import { ProfileImageUploader } from '@/feature/upload-image';
-import { createClient } from '@/utils/supabase/server';
-import { eq } from 'drizzle-orm';
-import { redirect } from 'next/navigation';
 import { InlineEdit } from '@/feature/edit-name';
 import { updateProfileName } from '@/actions/profile.action';
 import { InlineBioEditor } from '@/feature/edit-bio';
 import { updateProfileBio } from '@/actions/profile.action';
 import { LinkDnD } from '@/feature/links/edit-links';
 import { AddLinkButton } from '@/feature/links/add-link';
-import { Suspense } from 'react';
 
-const getProfile = async (userId: string) => {
-  const data = await db.query.profile.findFirst({
-    where: eq(profile.id, userId),
-    with: {
-      links: {
-        where: eq(link.userId, userId),
-        orderBy: (links, { asc }) => [asc(links.position)],
-      },
-    },
-  });
-  return data;
-};
-
-export default async function DashboardPage() {
-  const supabase = await createClient();
-
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-
-  if (!user) {
-    return redirect('/sign-in');
-  }
-
-  const data = await getProfile(user.id);
-
-  if (!data) {
-    return redirect('/protected/onboard');
-  }
-
+export const EditProfile = async ({
+  data,
+  userId,
+}: {
+  data: SelectProfile & { links: SelectLink[] };
+  userId: string;
+}) => {
   const handleSaveName = async (newName: string) => {
     'use server';
-    await updateProfileName(user.id, newName);
+    await updateProfileName(userId, newName);
   };
 
   const handleSaveBio = async (newBio: string) => {
     'use server';
-    await updateProfileBio(user.id, newBio);
+    await updateProfileBio(userId, newBio);
   };
 
-  console.log('data', data);
   return (
     <div className="motion-safe:animate-fadeInSlow p-8">
       <div className="mx-auto w-full max-w-screen-md">
@@ -61,7 +32,6 @@ export default async function DashboardPage() {
           <InlineEdit value={data.name} onSave={handleSaveName} />
           <InlineBioEditor initialValue={data.bio ?? ''} onSave={handleSaveBio} />
         </div>
-        {/* {JSON.stringify(data.links)} */}
         <div className="mt-8 w-full">
           <div className="flex flex-col gap-3">
             <div className="flex items-center justify-end">
@@ -73,4 +43,4 @@ export default async function DashboardPage() {
       </div>
     </div>
   );
-}
+};

@@ -1,0 +1,43 @@
+import { db } from '@/db';
+import { profile } from '@/db/schema';
+import { createClient } from '@/utils/supabase/server';
+import { eq } from 'drizzle-orm';
+import { EditProfile } from './edit-profile';
+import { PublicProfile } from './public-profile';
+
+const getProfile = async (username: string) => {
+  const data = await db.query.profile.findFirst({
+    where: eq(profile.username, username),
+    with: {
+      links: {
+        orderBy: (links, { asc }) => [asc(links.position)],
+      },
+    },
+  });
+  return data;
+};
+
+export default async function DashboardPage({ params }: { params: { username: string } }) {
+  const supabase = await createClient();
+
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  const data = await getProfile(params.username);
+
+  if (!data) {
+    return <div>This profile does not exist</div>;
+  }
+
+  if (!user) {
+    // not logged in
+    return <PublicProfile data={data} />;
+  }
+
+  if (data.id !== user.id) {
+    return <div>This profile does not belong to you, so just display it</div>;
+  }
+  // if the profile belongs to the user, then display the edit profile page
+  return <EditProfile data={data} userId={user.id} />;
+}

@@ -8,8 +8,10 @@ import { cn } from '@/lib/utils';
 import { CSS } from '@dnd-kit/utilities';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Link from 'next/link';
+import { useParams } from 'next/navigation';
 
 export function SortableItem({ link }: { link: SelectLink }) {
+  const { username } = useParams();
   const { isDragging, setActivatorNodeRef, attributes, listeners, setNodeRef, transform, transition } = useSortable({
     id: link.id,
   });
@@ -38,7 +40,7 @@ export function SortableItem({ link }: { link: SelectLink }) {
       />
       <Link
         scroll={false}
-        href={`/protected/dashboard/link/${link.id}/edit`}
+        href={`/${username}/link/${link.id}/edit`}
         className="flex flex-1 items-center gap-4 rounded-md bg-orange-100 px-4 py-2 text-slate-900"
       >
         <div className="flex h-12 w-12 items-center justify-center rounded-md bg-white p-1">
@@ -48,7 +50,7 @@ export function SortableItem({ link }: { link: SelectLink }) {
       </Link>
       <Link
         scroll={false}
-        href={`/protected/dashboard/link/${link.id}/delete`}
+        href={`/${username}/link/${link.id}/delete`}
         className="absolute -right-2 -top-2 flex h-8 w-8 items-center justify-center rounded-full border bg-white opacity-0 shadow transition-opacity duration-200 group-hover:opacity-100"
       >
         <i className="i-mdi-trash-outline" />
