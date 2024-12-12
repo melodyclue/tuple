@@ -33,7 +33,7 @@ function UploadImageModal({
   /** info cropped area */
   const [croppedAreaPixels, setCroppedAreaPixels] = useState<Area>();
 
-  const [_, setIsUploading] = useState(false);
+  const [isUploading, setIsUploading] = useState(false);
 
   const onCropComplete = useCallback((croppedArea: Area, croppedAreaPixels: Area) => {
     setCroppedAreaPixels(croppedAreaPixels);
@@ -128,9 +128,15 @@ function UploadImageModal({
             <div className="mt-4">
               <Button
                 type="button"
+                disabled={isUploading}
                 onClick={showCroppedImage}
                 className="rounded-3xl border bg-white px-8 py-2 font-medium text-slate-700 shadow-none"
               >
+                {isUploading && (
+                  <span className="flex items-center pr-2">
+                    <i className="i-tabler-loader-2 animate-spin text-slate-700" />
+                  </span>
+                )}
                 Crop Image
               </Button>
             </div>
