@@ -7,7 +7,7 @@ const defaultUrl = process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` 
 export const metadata = {
   metadataBase: new URL(defaultUrl),
   title: 'Tuple',
-  description: 'The fastest way to share your links',
+  description: 'The fastest way to create your profile',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

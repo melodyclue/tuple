@@ -11,7 +11,7 @@ import {
 import { getProfile } from '@/utils/getProfile';
 import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar';
 import Link from 'next/link';
-import { SelectProfile } from '@/db/schema';
+import type { SelectProfile } from '@/db/schema';
 
 export const Header = async () => {
   return (
