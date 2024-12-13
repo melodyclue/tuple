@@ -5,7 +5,6 @@ import StarterKit from '@tiptap/starter-kit';
 import { Extension } from '@tiptap/core';
 import Placeholder from '@tiptap/extension-placeholder';
 import Link from '@tiptap/extension-link';
-import dynamic from 'next/dynamic';
 
 interface InlineBioEditorProps {
   initialValue: string;
@@ -14,6 +13,7 @@ interface InlineBioEditorProps {
 
 export const InlineBioEditor = ({ initialValue, onSave }: InlineBioEditorProps) => {
   const editor = useEditor({
+    content: initialValue,
     extensions: [
       Extension.create({
         name: 'submit-command',
@@ -44,7 +44,6 @@ export const InlineBioEditor = ({ initialValue, onSave }: InlineBioEditorProps) 
         },
       }),
     ],
-    content: initialValue,
     editorProps: {
       attributes: {
         class: 'prose prose-sm max-w-full focus:outline-none',
