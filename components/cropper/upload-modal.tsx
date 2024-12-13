@@ -64,21 +64,18 @@ function UploadImageModal({
       setIsUploading(false);
     }
   }, [croppedAreaPixels, imgSrc, setShowUploadImageModal]);
-  /**
-   * Cropper側で画像データ読み込み完了
-   * Zoomの最小値をセットしZoomの値も更新
-   */
+
   const onMediaLoaded = useCallback((mediaSize: MediaSize) => {
     const { width, height } = mediaSize;
     const mediaAspectRadio = width / height;
     if (mediaAspectRadio > ASPECT_RATIO) {
-      // 縦幅に合わせてZoomを指定
+      // set zoom to fit the height
       const result = CROP_WIDTH / ASPECT_RATIO / height;
       setZoom(result);
       setMinZoom(result);
       return;
     }
-    // 横幅に合わせてZoomを指定
+    // set zoom to fit the width
     const result = CROP_WIDTH / width;
     setZoom(result);
     setMinZoom(result);

@@ -10,7 +10,7 @@ import {
   type DragEndEvent,
 } from '@dnd-kit/core';
 import { arrayMove, SortableContext, sortableKeyboardCoordinates } from '@dnd-kit/sortable';
-import { useId, useActionState, useOptimistic, useTransition, useEffect, useState } from 'react';
+import { useId, useActionState, useTransition, useEffect, useState } from 'react';
 import type { SelectLink } from '@/db/schema';
 import { updateLinkPosition } from '@/actions/profile.action';
 import { SortableItem } from './link-item';

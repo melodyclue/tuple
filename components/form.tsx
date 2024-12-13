@@ -1,14 +1,7 @@
 import { useInputControl } from '@conform-to/react';
-// import { REGEXP_ONLY_DIGITS_AND_CHARS, type OTPInputProps } from "input-otp";
 import type React from 'react';
 import { type JSX, useId } from 'react';
 import { Checkbox, type CheckboxProps } from './ui/checkbox';
-// import {
-//   InputOTP,
-//   InputOTPGroup,
-//   InputOTPSeparator,
-//   InputOTPSlot,
-// } from "./ui/input-otp";
 import { Input } from './ui/input';
 import { Label } from './ui/label';
 import { Textarea } from './ui/textarea';
@@ -144,50 +137,6 @@ export function FieldWithPrefix({
     </div>
   );
 }
-
-// export function OTPField({
-//   labelProps,
-//   inputProps,
-//   errors,
-//   className,
-// }: {
-//   labelProps: React.LabelHTMLAttributes<HTMLLabelElement>;
-//   inputProps: Partial<OTPInputProps & { render: never }>;
-//   errors?: ListOfErrors;
-//   className?: string;
-// }) {
-//   const fallbackId = useId();
-//   const id = inputProps.id ?? fallbackId;
-//   const errorId = errors?.length ? `${id}-error` : undefined;
-//   return (
-//     <div className={className}>
-//       <Label htmlFor={id} {...labelProps} />
-//       <InputOTP
-//         pattern={REGEXP_ONLY_DIGITS_AND_CHARS}
-//         maxLength={6}
-//         id={id}
-//         aria-invalid={errorId ? true : undefined}
-//         aria-describedby={errorId}
-//         {...inputProps}
-//       >
-//         <InputOTPGroup className="w-full">
-//           <InputOTPSlot index={0} className="h-10 w-10" />
-//           <InputOTPSlot index={1} className="h-10 w-10" />
-//           <InputOTPSlot index={2} className="h-10 w-10" />
-//           {/* </InputOTPGroup> */}
-//           {/* <InputOTPSeparator /> */}
-//           {/* <InputOTPGroup> */}
-//           <InputOTPSlot index={3} className="h-10 w-10" />
-//           <InputOTPSlot index={4} className="h-10 w-10" />
-//           <InputOTPSlot index={5} className="h-10 w-10" />
-//         </InputOTPGroup>
-//       </InputOTP>
-//       <div className="pb-1 pl-1 pr-4 pt-1">
-//         {errorId ? <ErrorList id={errorId} errors={errors} /> : null}
-//       </div>
-//     </div>
-//   );
-// }
 
 export function TextareaField({
   labelProps,
