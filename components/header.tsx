@@ -11,7 +11,7 @@ import {
 import { getProfile } from '@/utils/getProfile';
 import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar';
 import Link from 'next/link';
-import { redirect } from 'next/navigation';
+import { SelectProfile } from '@/db/schema';
 
 export const Header = async () => {
   return (
@@ -35,26 +35,35 @@ const HeaderAuth = async () => {
     data: { user },
   } = await supabase.auth.getUser();
 
-  return user ? (
-    <UserDropdown userId={user.id} />
-  ) : (
-    <div className="flex gap-2">
-      <form>
-        <input type="hidden" name="username" value="test_username" />
-        <input type="hidden" name="provider" value="google" />
-        <SubmitButton formAction={signInWithOAuthAction} pendingText="Signing in...">
-          Sign in with Google
-        </SubmitButton>
-      </form>
-    </div>
-  );
+  if (!user)
+    return (
+      <div className="flex gap-2">
+        <form>
+          <input type="hidden" name="username" value="test_username" />
+          <input type="hidden" name="provider" value="google" />
+          <SubmitButton formAction={signInWithOAuthAction} pendingText="Signing in...">
+            Sign in with Google
+          </SubmitButton>
+        </form>
+      </div>
+    );
+  const profile = await getProfile(user.id);
+
+  if (!profile) {
+    return (
+      <Link
+        href="/onboard"
+        className="rounded-3xl border bg-white px-8 py-2 font-medium text-slate-700 shadow-none transition-all disabled:cursor-not-allowed disabled:opacity-50"
+      >
+        Create Profile
+      </Link>
+    );
+  }
+
+  return <UserDropdown profile={profile} />;
 };
 
-const UserDropdown = async ({ userId }: { userId: string }) => {
-  const profile = await getProfile(userId);
-
-  if (!profile) redirect('/onboard');
-
+const UserDropdown = async ({ profile }: { profile: SelectProfile }) => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>

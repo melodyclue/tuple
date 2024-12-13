@@ -23,8 +23,8 @@ export const PublicProfile = ({ data }: { data: SelectProfile & { links: SelectL
                 </div>
               </div>
             ) : (
-              <div className="h-24 w-24 rounded-full border-orange-200 bg-orange-100">
-                <div className="flex h-full w-full items-center justify-center overflow-hidden rounded-full bg-orange-100 text-white">
+              <div className="h-24 w-24 rounded-full border-orange-200 bg-orange-200">
+                <div className="flex h-full w-full items-center justify-center overflow-hidden rounded-full text-white">
                   <span className="text-3xl font-semibold">{data.username.charAt(0).toUpperCase()}</span>
                 </div>
               </div>

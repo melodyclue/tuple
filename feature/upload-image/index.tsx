@@ -55,9 +55,9 @@ export const ProfileImageUploader = ({ imageUrl, slug }: { imageUrl: string | nu
         // biome-ignore lint/a11y/useKeyWithClickEvents: <explanation>
         <div
           onClick={() => ref.current?.click()}
-          className="h-24 w-24 cursor-pointer rounded-full border-orange-200 bg-orange-100"
+          className="h-24 w-24 cursor-pointer rounded-full border-orange-200 bg-orange-200"
         >
-          <div className="flex h-full w-full items-center justify-center overflow-hidden rounded-full bg-orange-100 text-white">
+          <div className="flex h-full w-full items-center justify-center overflow-hidden rounded-full text-white">
             <span className="text-3xl font-semibold">{slug.charAt(0).toUpperCase()}</span>
           </div>
         </div>
