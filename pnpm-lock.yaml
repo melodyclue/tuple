@@ -83,9 +83,6 @@ importers:
       '@iconify-json/tabler':
         specifier: ^1.2.10
         version: 1.2.10
-      '@next-safe-action/adapter-react-hook-form':
-        specifier: ^1.0.13
-        version: 1.0.13(@hookform/resolvers@3.9.1(react-hook-form@7.54.0(react@19.0.0)))(next-safe-action@7.9.9(next@15.0.4(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(zod@3.24.0))(next@15.0.4(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(react-dom@19.0.0(react@19.0.0))(react-hook-form@7.54.0(react@19.0.0))(react@19.0.0)
       '@paralleldrive/cuid2':
         specifier: ^2.2.2
         version: 2.2.2
@@ -161,12 +158,6 @@ importers:
       next:
         specifier: v15.0.4
         version: 15.0.4(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
-      next-themes:
-        specifier: ^0.4.4
-        version: 0.4.4(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
-      nuqs:
-        specifier: ^2.2.3
-        version: 2.2.3(next@15.0.4(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(react@19.0.0)
       postgres:
         specifier: ^3.4.5
         version: 3.4.5
@@ -182,9 +173,6 @@ importers:
       react-easy-crop:
         specifier: ^5.2.0
         version: 5.2.0(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
-      react-hook-form:
-        specifier: ^7.54.0
-        version: 7.54.0(react@19.0.0)
       zod:
         specifier: ^3.24.0
         version: 3.24.0
@@ -995,16 +983,6 @@ packages:
 
   '@jridgewell/trace-mapping@0.3.25':
     resolution: {integrity: sha512-vNk6aEwybGtawWmy/PzwnGDOjCkLWSD2wqvjGGAgOAwCGWySYXfYoxt00IJkTF+8Lb57DwOb3Aa0o9CApepiYQ==}
-
-  '@next-safe-action/adapter-react-hook-form@1.0.13':
-    resolution: {integrity: sha512-J1zfdiVWcs6w388fKwdm0V/2UojU3KkqSQb4dx428HMujuF23UKaZ7v+R10I+AQrkR3yH7RIMIhYOdNwZN33DA==}
-    peerDependencies:
-      '@hookform/resolvers': '>= 3.0.0'
-      next: '>= 14.0.0'
-      next-safe-action: '>= 7.6.0'
-      react: '>= 18.2.0'
-      react-dom: '>= 18.2.0'
-      react-hook-form: '>= 7.0.0'
 
   '@next/env@15.0.4':
     resolution: {integrity: sha512-WNRvtgnRVDD4oM8gbUcRc27IAhaL4eXQ/2ovGbgLnPGUvdyDr8UdXP4Q/IBDdAdojnD2eScryIDirv0YUCjUVw==}
@@ -2544,9 +2522,6 @@ packages:
     resolution: {integrity: sha512-qOOzS1cBTWYF4BH8fVePDBOO9iptMnGUEZwNc/cMWnTV2nVLZ7VoNWEPHkYczZA0pdoA7dl6e7FL659nX9S2aw==}
     engines: {node: '>=16 || 14 >=14.17'}
 
-  mitt@3.0.1:
-    resolution: {integrity: sha512-vKivATfr97l2/QBCYAkXYDbrIWPM2IIKEl7YPhjCvKlG3kE2gm+uBo6nEXK3M5/Ffh/FLpKExzOQ3JJoJGFKBw==}
-
   mlly@1.7.3:
     resolution: {integrity: sha512-xUsx5n/mN0uQf4V548PKQ+YShA4/IW0KI1dZhrNrPCLG+xizETbHTkOa1f8/xut9JRPp8kQuMnz0oqwkTiLo/A==}
 
@@ -2560,33 +2535,6 @@ packages:
     resolution: {integrity: sha512-WNLf5Sd8oZxOm+TzppcYk8gVOgP+l58xNy58D0nbUnOxOWRWvlcCV4kUF7ltmI6PsrLl/BgKEyS4mqsGChFN0w==}
     engines: {node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1}
     hasBin: true
-
-  next-safe-action@7.9.9:
-    resolution: {integrity: sha512-wFKKCgfHNsObfbDrbOQV8WAE6RnVx7dwmuUazqdNaTL3ZdDzUlRTnIIVI36qSjmgA3zwwxj3nvfxgK9d0fWr5w==}
-    engines: {node: '>=18.17'}
-    peerDependencies:
-      '@sinclair/typebox': '>= 0.33.3'
-      next: '>= 14.0.0'
-      react: '>= 18.2.0'
-      react-dom: '>= 18.2.0'
-      valibot: '>= 0.36.0'
-      yup: '>= 1.0.0'
-      zod: '>= 3.0.0'
-    peerDependenciesMeta:
-      '@sinclair/typebox':
-        optional: true
-      valibot:
-        optional: true
-      yup:
-        optional: true
-      zod:
-        optional: true
-
-  next-themes@0.4.4:
-    resolution: {integrity: sha512-LDQ2qIOJF0VnuVrrMSMLrWGjRMkq+0mpgl6e0juCLqdJ+oo8Q84JRWT6Wh11VDQKkMMe+dVzDKLWs5n87T+PkQ==}
-    peerDependencies:
-      react: ^16.8 || ^17 || ^18 || ^19 || ^19.0.0-rc
-      react-dom: ^16.8 || ^17 || ^18 || ^19 || ^19.0.0-rc
 
   next@15.0.4:
     resolution: {integrity: sha512-nuy8FH6M1FG0lktGotamQDCXhh5hZ19Vo0ht1AOIQWrYJLP598TIUagKtvJrfJ5AGwB/WmDqkKaKhMpVifvGPA==}
@@ -2622,21 +2570,6 @@ packages:
 
   normalize-wheel@1.0.1:
     resolution: {integrity: sha512-1OnlAPZ3zgrk8B91HyRj+eVv+kS5u+Z0SCsak6Xil/kmgEia50ga7zfkumayonZrImffAxPU/5WcyGhzetHNPA==}
-
-  nuqs@2.2.3:
-    resolution: {integrity: sha512-nMCcUW06KSqEXA0xp+LiRqDpIE59BVYbjZLe0HUisJAlswfihHYSsAjYTzV0lcE1thfh8uh+LqUHGdQ8qq8rfA==}
-    peerDependencies:
-      '@remix-run/react': '>=2'
-      next: '>=14.2.0'
-      react: '>=18.2.0 || ^19.0.0-0'
-      react-router-dom: '>=6'
-    peerDependenciesMeta:
-      '@remix-run/react':
-        optional: true
-      next:
-        optional: true
-      react-router-dom:
-        optional: true
 
   nwsapi@2.2.16:
     resolution: {integrity: sha512-F1I/bimDpj3ncaNDhfyMWuFqmQDBwDB0Fogc2qpL3BWvkQteFD/8BzWuIRl83rq0DXfm8SGt/HFhLXZyljTXcQ==}
@@ -4188,15 +4121,6 @@ snapshots:
     dependencies:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.0
-
-  '@next-safe-action/adapter-react-hook-form@1.0.13(@hookform/resolvers@3.9.1(react-hook-form@7.54.0(react@19.0.0)))(next-safe-action@7.9.9(next@15.0.4(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(zod@3.24.0))(next@15.0.4(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(react-dom@19.0.0(react@19.0.0))(react-hook-form@7.54.0(react@19.0.0))(react@19.0.0)':
-    dependencies:
-      '@hookform/resolvers': 3.9.1(react-hook-form@7.54.0(react@19.0.0))
-      next: 15.0.4(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
-      next-safe-action: 7.9.9(next@15.0.4(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(zod@3.24.0)
-      react: 19.0.0
-      react-dom: 19.0.0(react@19.0.0)
-      react-hook-form: 7.54.0(react@19.0.0)
 
   '@next/env@15.0.4': {}
 
@@ -5806,8 +5730,6 @@ snapshots:
 
   minipass@7.1.2: {}
 
-  mitt@3.0.1: {}
-
   mlly@1.7.3:
     dependencies:
       acorn: 8.14.0
@@ -5824,19 +5746,6 @@ snapshots:
       thenify-all: 1.6.0
 
   nanoid@3.3.8: {}
-
-  next-safe-action@7.9.9(next@15.0.4(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(zod@3.24.0):
-    dependencies:
-      next: 15.0.4(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
-      react: 19.0.0
-      react-dom: 19.0.0(react@19.0.0)
-    optionalDependencies:
-      zod: 3.24.0
-
-  next-themes@0.4.4(react-dom@19.0.0(react@19.0.0))(react@19.0.0):
-    dependencies:
-      react: 19.0.0
-      react-dom: 19.0.0(react@19.0.0)
 
   next@15.0.4(react-dom@19.0.0(react@19.0.0))(react@19.0.0):
     dependencies:
@@ -5870,13 +5779,6 @@ snapshots:
   normalize-range@0.1.2: {}
 
   normalize-wheel@1.0.1: {}
-
-  nuqs@2.2.3(next@15.0.4(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(react@19.0.0):
-    dependencies:
-      mitt: 3.0.1
-      react: 19.0.0
-    optionalDependencies:
-      next: 15.0.4(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
 
   nwsapi@2.2.16: {}
 
