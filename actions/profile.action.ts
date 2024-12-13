@@ -22,6 +22,7 @@ export async function updateProfileName(userId: string, name: string) {
 
 export async function updateProfileBio(userId: string, bio: string) {
   await authGuard();
+
   const cleanBio = DOMPurify.sanitize(bio);
   await db.update(profile).set({ bio: cleanBio }).where(eq(profile.id, userId));
   revalidatePath('/protected/dashboard');

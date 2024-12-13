@@ -1,4 +1,4 @@
-import { signInWithOAuthAction, signOutAction } from '@/app/actions';
+import { signInWithGoogle, signOutAction } from '@/actions/auth.action';
 import { createClient } from '@/utils/supabase/server';
 import { SubmitButton } from './submit-button';
 import {
@@ -41,7 +41,7 @@ const HeaderAuth = async () => {
         <form>
           <input type="hidden" name="username" value="test_username" />
           <input type="hidden" name="provider" value="google" />
-          <SubmitButton formAction={signInWithOAuthAction} pendingText="Signing in...">
+          <SubmitButton formAction={signInWithGoogle} pendingText="Signing in...">
             Sign in with Google
           </SubmitButton>
         </form>
