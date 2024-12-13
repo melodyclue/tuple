@@ -10,8 +10,7 @@ export const authGuard = async () => {
   } = await supabase.auth.getUser();
 
   if (error || !user) {
-    console.log('redirecting to sign-in');
-    redirect('/sign-in');
+    redirect('/');
   }
 
   return user;
