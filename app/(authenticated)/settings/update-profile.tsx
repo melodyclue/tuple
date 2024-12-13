@@ -5,15 +5,10 @@ import { getZodConstraint } from '@conform-to/zod';
 import { getInputProps, useForm } from '@conform-to/react';
 import { startTransition, useActionState } from 'react';
 import { parseWithZod } from '@conform-to/zod';
-import { Field, FieldWithPrefix } from '@/components/form';
-import { z } from 'zod';
+import { FieldWithPrefix } from '@/components/form';
 import { updatProfile } from '@/actions/settings.action';
 import { updateProfileSchema, type updateProfileSchemaType } from '@/utils/validation';
-
-const insertProfileSchema = z.object({
-  name: z.string().min(1).max(20),
-  username: z.string().min(1).max(20),
-});
+import { useToast } from '@/hooks/use-toast';
 
 type UpdateProfileProps = {
   username: string;
@@ -22,6 +17,7 @@ type UpdateProfileProps = {
 
 export const UpdateProfile = ({ username, name }: UpdateProfileProps) => {
   const [lastResult, action] = useActionState(updatProfile, undefined);
+  const { toast } = useToast();
 
   const [form, fields] = useForm<updateProfileSchemaType>({
     id: 'edit-profile',
@@ -34,6 +30,10 @@ export const UpdateProfile = ({ username, name }: UpdateProfileProps) => {
       event.preventDefault();
       startTransition(() => {
         action(formData);
+        toast({
+          title: 'Profile updated',
+          description: 'Your profile has been updated',
+        });
       });
     },
     onValidate({ formData }) {

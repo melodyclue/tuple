@@ -60,7 +60,7 @@ export const InlineBioEditor = ({ initialValue, onSave }: InlineBioEditorProps) 
   });
 
   return (
-    <div className="rounded-md p-2 text-slate-800 transition-all duration-300 hover:bg-slate-50">
+    <div className="rounded-md p-2 transition-all duration-300 hover:bg-slate-50">
       <EditorContent editor={editor} />
     </div>
   );

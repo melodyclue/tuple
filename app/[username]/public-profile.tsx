@@ -31,7 +31,7 @@ export const PublicProfile = ({ data }: { data: SelectProfile & { links: SelectL
             )}
           </div>
           <h1 className="block p-2 text-4xl font-bold">{data.name}</h1>
-          <div className="rounded-md p-2 text-slate-800">{parse(data.bio ?? '')}</div>
+          <div className="rounded-md p-2">{parse(data.bio ?? '')}</div>
         </div>
         <div className="mt-8 w-full">
           <div className="flex flex-col gap-3">
@@ -46,10 +46,10 @@ export const PublicProfile = ({ data }: { data: SelectProfile & { links: SelectL
                     aria-label={link.title}
                     key={link.id}
                     href={link.url}
-                    className="flex flex-1 items-center gap-4 rounded-md bg-orange-100 px-4 py-2 text-slate-900"
+                    className="flex flex-1 items-center gap-4 rounded-md bg-orange-100 px-4 py-2"
                   >
                     <div className="flex h-12 w-12 items-center justify-center rounded-md bg-white p-1">
-                      <FontAwesomeIcon icon={icon} className="h-5 w-5 text-slate-700" />
+                      <FontAwesomeIcon icon={icon} className="h-5 w-5 text-zinc-700" />
                     </div>
                     {link.title}
                   </a>

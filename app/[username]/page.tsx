@@ -5,6 +5,7 @@ import { eq } from 'drizzle-orm';
 import { EditProfile } from './edit-profile';
 import { PublicProfile } from './public-profile';
 import { Header } from '@/components/header';
+import { Footer } from '@/components/footer';
 
 const getProfile = async (username: string) => {
   const data = await db.query.profile.findFirst({
@@ -41,12 +42,15 @@ const DashboardPage: React.FC<{
   const isOwner = user && data.id === user.id;
 
   return isOwner ? (
-    <>
+    <div className="grid min-h-screen grid-rows-[auto_1fr_auto]">
       <Header />
       <EditProfile data={data} userId={user.id} />
-    </>
+    </div>
   ) : (
-    <PublicProfile data={data} />
+    <div className="grid min-h-screen grid-rows-[1fr_auto]">
+      <PublicProfile data={data} />
+      <Footer />
+    </div>
   );
 };
 

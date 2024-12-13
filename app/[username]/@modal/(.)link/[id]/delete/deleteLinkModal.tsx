@@ -59,7 +59,7 @@ export const DeleteLinkModal = ({ link }: { link: SelectLink | undefined }) => {
       <DialogContent className="z-50 w-full max-w-xl p-8">
         <div className="mb-6 flex items-center">
           <DialogTitle className="flex w-full items-center justify-center gap-2 text-center">
-            <FontAwesomeIcon icon={icon} size="lg" className="h-8 w-8 text-slate-700" />
+            <FontAwesomeIcon icon={icon} size="lg" className="h-8 w-8 text-zinc-700" />
             <span className="text-lg font-medium">Delete Link</span>
           </DialogTitle>
         </div>

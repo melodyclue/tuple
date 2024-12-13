@@ -41,10 +41,10 @@ export function SortableItem({ link }: { link: SelectLink }) {
       <Link
         scroll={false}
         href={`/${username}/link/${link.id}/edit`}
-        className="flex flex-1 items-center gap-4 rounded-md bg-orange-100 px-4 py-2 text-slate-900"
+        className="flex flex-1 items-center gap-4 rounded-md bg-orange-100 px-4 py-2"
       >
         <div className="flex h-12 w-12 items-center justify-center rounded-md bg-white p-1">
-          <FontAwesomeIcon icon={icon} className="h-5 w-5 text-slate-700" />
+          <FontAwesomeIcon icon={icon} className="h-5 w-5 text-zinc-700" />
         </div>
         {link.title}
       </Link>

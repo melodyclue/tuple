@@ -55,7 +55,7 @@ export function Field({
     <div className={className}>
       <Label htmlFor={id} {...labelProps} />
       <div className="flex items-center gap-2">
-        {prefix ? <div className="text-sm text-slate-600">{prefix}</div> : null}
+        {prefix ? <div className="text-sm text-secondary-foreground">{prefix}</div> : null}
         <Input
           key={id}
           id={id}
@@ -123,9 +123,9 @@ export function FieldWithPrefix({
   const { key, ...rest } = inputProps;
   return (
     <div className={className}>
-      <Label htmlFor={id} {...labelProps} className="mb-1 block tracking-wide text-slate-800" />
+      <Label htmlFor={id} {...labelProps} className="mb-1 block tracking-wide" />
       <div className="flex items-stretch overflow-hidden rounded-md border border-input">
-        <div className="mr-1 flex items-center bg-slate-100 px-2 text-sm tracking-wide text-slate-700">{prefix}</div>
+        <div className="mr-1 flex items-center bg-slate-100 px-2 text-sm tracking-wide text-zinc-700">{prefix}</div>
         <Input
           id={id}
           key={key}

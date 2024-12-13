@@ -53,7 +53,7 @@ const HeaderAuth = async () => {
     return (
       <Link
         href="/onboard"
-        className="rounded-3xl border bg-white px-8 py-2 font-medium text-slate-700 shadow-none transition-all disabled:cursor-not-allowed disabled:opacity-50"
+        className="rounded-3xl border bg-white px-8 py-2 font-medium text-zinc-700 shadow-none transition-all disabled:cursor-not-allowed disabled:opacity-50"
       >
         Create Profile
       </Link>
@@ -76,7 +76,7 @@ const UserDropdown = async ({ profile }: { profile: SelectProfile }) => {
         <DropdownMenuItem asChild>
           <Link href={`/${profile.username}`} className="block cursor-pointer px-4 py-2">
             <div className="mb-0.5 text-[16px] font-semibold">{profile.name}</div>
-            {/* <div className="text-[12px] text-slate-500">{profile.headline}</div> */}
+            {/* <div className="text-[12px] text-zinc-500">{profile.headline}</div> */}
           </Link>
         </DropdownMenuItem>
         <DropdownMenuSeparator />

@@ -35,7 +35,7 @@ function LinkSelection({ onSelect }: { onSelect: (option: LinkOption) => void })
               onClick={() => onSelect(option)}
             >
               <div className="flex items-center gap-4">
-                <FontAwesomeIcon icon={option.icon} size="lg" className="h-8 w-8 text-slate-700" />
+                <FontAwesomeIcon icon={option.icon} size="lg" className="h-8 w-8 text-zinc-700" />
                 <div>{option.label}</div>
               </div>
               <div>
@@ -89,7 +89,7 @@ function LinkInput({ selectedLink, onBack }: { selectedLink: LinkOption; onBack:
           <FontAwesomeIcon icon={faChevronLeft} />
         </button>
         <DialogTitle className="w-full text-center">
-          <FontAwesomeIcon icon={selectedLink.icon} size="lg" className="h-8 w-8 text-slate-700" />
+          <FontAwesomeIcon icon={selectedLink.icon} size="lg" className="h-8 w-8 text-zinc-700" />
         </DialogTitle>
       </div>
       <div className="px-8">

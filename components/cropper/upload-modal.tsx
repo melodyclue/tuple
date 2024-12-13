@@ -130,11 +130,11 @@ function UploadImageModal({
                 type="button"
                 disabled={isUploading}
                 onClick={showCroppedImage}
-                className="rounded-3xl border bg-white px-8 py-2 font-medium text-slate-700 shadow-none"
+                className="rounded-3xl border bg-white px-8 py-2 font-medium text-zinc-700 shadow-none"
               >
                 {isUploading && (
                   <span className="flex items-center pr-2">
-                    <i className="i-tabler-loader-2 animate-spin text-slate-700" />
+                    <i className="i-tabler-loader-2 animate-spin text-zinc-700" />
                   </span>
                 )}
                 Crop Image

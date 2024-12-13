@@ -9,6 +9,7 @@ import { Field, FieldWithPrefix } from '@/components/form';
 import { z } from 'zod';
 import { createProfile } from '@/actions/settings.action';
 import { createProfileSchema, type createProfileSchemaType } from '@/utils/validation';
+import { useToast } from '@/hooks/use-toast';
 
 const insertProfileSchema = z.object({
   name: z.string().min(1).max(20),
@@ -17,6 +18,7 @@ const insertProfileSchema = z.object({
 
 export const CreateProfile = () => {
   const [lastResult, action] = useActionState(createProfile, undefined);
+  const { toast } = useToast();
 
   const [form, fields] = useForm<createProfileSchemaType>({
     id: 'edit-name',
@@ -30,6 +32,10 @@ export const CreateProfile = () => {
       event.preventDefault();
       startTransition(() => {
         action(formData);
+        toast({
+          title: 'Profile created',
+          description: 'Your profile has been created',
+        });
       });
     },
     onValidate({ formData }) {
