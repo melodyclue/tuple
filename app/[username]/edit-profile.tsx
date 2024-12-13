@@ -6,6 +6,8 @@ import { InlineBioEditor } from '@/feature/edit-bio';
 import { updateProfileBio } from '@/actions/profile.action';
 import { LinkDnD } from '@/feature/links/edit-links';
 import { AddLinkButton } from '@/feature/links/add-link';
+import { Button } from '@/components/ui/button';
+import { ShareButton } from '@/components/share-button';
 
 export const EditProfile = async ({
   data,
@@ -28,7 +30,12 @@ export const EditProfile = async ({
     <div className="motion-safe:animate-fadeInSlow p-8">
       <div className="mx-auto w-full max-w-screen-md">
         <div className="space-y-4">
-          <ProfileImageUploader imageUrl={data.imageUrl} slug={data.username} />
+          <div className="flex items-center justify-between">
+            <ProfileImageUploader imageUrl={data.imageUrl} slug={data.username} />
+            <div className="flex items-center justify-center">
+              <ShareButton username={data.username} />
+            </div>
+          </div>
           <InlineEdit value={data.name} onSave={handleSaveName} />
           <InlineBioEditor initialValue={data.bio ?? ''} onSave={handleSaveBio} />
         </div>
