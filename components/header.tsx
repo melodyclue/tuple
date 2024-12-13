@@ -87,7 +87,7 @@ const UserDropdown = async ({ profile }: { profile: SelectProfile }) => {
         <DropdownMenuSeparator />
         <DropdownMenuItem asChild className="w-full cursor-pointer text-[14px] transition-all hover:bg-slate-50">
           <form action={signOutAction}>
-            <button type="submit" className="w-full text-rose-600">
+            <button type="submit" className="w-full text-left text-rose-600">
               Logout
             </button>
           </form>
