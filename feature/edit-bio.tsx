@@ -27,6 +27,7 @@ export const InlineBioEditor = ({ initialValue, onSave }: InlineBioEditorProps) 
         },
       }),
       Placeholder.configure({
+        emptyNodeClass: 'is-editor-empty',
         placeholder: 'Write something...',
       }),
       Link.configure({

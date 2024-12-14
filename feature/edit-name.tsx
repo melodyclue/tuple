@@ -48,7 +48,8 @@ export function InlineEdit({ value: initialValue, onSave, className }: InlineEdi
         onChange={(e) => setValue(e.target.value)}
         onBlur={handleBlur}
         onKeyDown={handleKeyDown}
-        className="border-none p-2 text-4xl font-bold"
+        className="border-none p-2 text-4xl font-bold placeholder:text-zinc-500"
+        placeholder="Enter your name"
       />
     );
   }
@@ -63,7 +64,7 @@ export function InlineEdit({ value: initialValue, onSave, className }: InlineEdi
       }}
       className="block p-2 text-4xl font-bold transition-all duration-300 hover:bg-slate-50"
     >
-      {value}
+      {value || <span className="text-zinc-500">Enter your name</span>}
     </h1>
   );
 }
