@@ -2,28 +2,38 @@
 
 https://tuple.at/
 
-The fastest way to create your profile.
+**The fastest way to create your profile.**
+
+> **Note**
+> ⚠️ This project is currently in beta-like state and may contain bugs.
+> If you encounter any issues, please report them in the GitHub issues - your feedback helps improve the project!
+>
+> **Info**
+> 🚀 This project is submitted as part of the Supabase Launch Week 13 Hackathon.
 
 ## Built with
 
-- [Next.js 15](https://nextjs.org/)
-- [Supabase](https://supabase.com/)
+- [NextJS 15](https://nextjs.org/)
+- [Supabase](https://supabase.com/) for auth and database
+- [Vercel](https://vercel.com/)
 - [Drizzle ORM](https://orm.drizzle.team/)
-- [Cloudflare R2](https://www.cloudflare.com/developer-platform/r2/)
+- [Cloudflare R2](https://www.cloudflare.com/developer-platform/r2/) for storage
 - [Tailwind CSS](https://tailwindcss.com/)
 - [Shadcn/ui](https://ui.shadcn.com/)
-- [Vercel](https://vercel.com/)
+- [DND Kit](https://dndkit.com/)
+- [tiptap](https://tiptap.dev/)
 
 ## How to use
 
-1. **Log in with Google**: Start by signing in with your Google account.
-2. **Set your username**: Choose a unique username that will be used in your profile URL.
-3. **Edit your profile**: Go to the profile page where you can:
-   - **Upload an image**: Set your profile picture.
-   - **Add your name**: Enter your display name.
-   - **Write a bio**: Add a short introduction about yourself.
-   - **Add links**: Include URLs for your email, social media, website, or other important links.
-4. **Share your profile**: Click the **Share** button in the top-right corner to copy your profile link and share it with others.
+1. Sign in with Google and set your unique username
+2. Customize your profile page:
+   - Profile Image: Click to upload
+   - Name & Bio: Click fields to edit
+   - Links:
+     - Click "Add Link" and enter title & URL
+     - Add up to 10 links
+     - Click to edit, trash icon to delete
+     - Drag handle on left to reorder
 
 ## Motivation
 
