@@ -1,8 +1,19 @@
+<p align="center">
+   <img src="https://github.com/user-attachments/assets/0a197e58-6e82-4437-92a9-e1aac7eb1a36" width="420px" alt="Tuple guide-Cover">
+</p>
+
 # Tuple
 
 https://tuple.at/
 
 **The fastest way to create your profile.**
+
+
+https://github.com/user-attachments/assets/9eeaf3a3-48db-49be-aa07-74ba1b8054b2 
+
+（Voice By [ondoku3.com](https://ondoku3.com/ja/)）
+
+
 
 > **Note**
 > ⚠️ This project is currently in beta-like state and may contain bugs.
@@ -56,3 +67,5 @@ This project also served as an opportunity to:
 
 - [GitHub](https://github.com/melodyclue)
 - [X (Twitter)](https://x.com/use_melodyclue)
+- [YouTube](https://www.youtube.com/@melodyclue)
+
