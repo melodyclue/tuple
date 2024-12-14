@@ -17,7 +17,7 @@ export async function updateProfileName(userId: string, name: string) {
 
   await db.update(profile).set({ name }).where(eq(profile.id, userId));
 
-  revalidatePath('/protected/dashboard');
+  revalidatePath('/');
 }
 
 export async function updateProfileBio(userId: string, bio: string) {
@@ -25,7 +25,7 @@ export async function updateProfileBio(userId: string, bio: string) {
 
   const cleanBio = DOMPurify.sanitize(bio);
   await db.update(profile).set({ bio: cleanBio }).where(eq(profile.id, userId));
-  revalidatePath('/protected/dashboard');
+  revalidatePath('/');
 }
 
 export async function insertNewLink(prevState: unknown, formData: FormData) {
@@ -87,7 +87,7 @@ export async function insertNewLink(prevState: unknown, formData: FormData) {
     userId: user.id,
   });
 
-  revalidatePath('/protected/dashboard');
+  revalidatePath('/');
   return { result: submission.reply(), status: 'success' };
 }
 
@@ -107,7 +107,7 @@ export async function deleteLink(prevState: unknown, formData: FormData) {
 
   await db.delete(link).where(eq(link.id, id));
 
-  revalidatePath('/protected/dashboard');
+  revalidatePath('/');
   return { result: submission.reply(), status: 'success' };
 }
 
@@ -141,7 +141,7 @@ export async function updateLink(prevState: unknown, formData: FormData) {
 
   await db.update(link).set({ url: fullUrl, title }).where(eq(link.id, id));
 
-  revalidatePath('/protected/dashboard');
+  revalidatePath('/');
   return { result: submission.reply(), status: 'success' };
 }
 
@@ -181,7 +181,7 @@ export async function updateLinkPosition(
     .set({ position: sql`CAST(${finalSql} AS integer)` }) // Cast CASE to integer
     .where(and(inArray(link.id, ids), eq(link.userId, user.id)));
 
-  revalidatePath('/protected/dashboard');
+  revalidatePath('/');
 
   const links = await db.query.link.findMany({
     where: eq(link.userId, user.id),
