@@ -36,6 +36,7 @@ export const editLinkSchema = z.object({
   id: z.string(),
   url: z.string(),
   title: z.string(),
+  type: z.enum(LINK_TYPES),
 });
 export type editLinkSchemaProps = z.infer<typeof editLinkSchema>;
 

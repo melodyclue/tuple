@@ -43,7 +43,7 @@ export async function createProfile(prevState: unknown, formData: FormData) {
     username,
   });
 
-  revalidatePath(`/settings`);
+  revalidatePath('/settings');
   redirect(`/${username}`);
 }
 
@@ -82,6 +82,6 @@ export async function updatProfile(prevState: unknown, formData: FormData) {
     })
     .where(eq(profile.id, user.id));
 
-  revalidatePath(`/settings`);
+  revalidatePath('/settings');
   return { result: submission.reply() };
 }

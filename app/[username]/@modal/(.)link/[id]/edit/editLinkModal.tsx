@@ -33,6 +33,7 @@ export const EditLinkModal = ({ link }: { link: SelectLink }) => {
     defaultValue: {
       id: link.id,
       url: link.url.replace(baseUrl, ''),
+      type: link.type,
       title: link.title,
     },
     onValidate({ formData }) {
@@ -77,6 +78,7 @@ export const EditLinkModal = ({ link }: { link: SelectLink }) => {
         <div className="px-8">
           <form id={form.id} onSubmit={form.onSubmit} action={action} noValidate>
             <input key={fields.id.key} name={fields.id.name} defaultValue={fields.id.initialValue} hidden />
+            <input key={fields.type.key} name={fields.type.name} defaultValue={fields.type.initialValue} hidden />
             <div className="mb-6 flex flex-col gap-4">
               <Field
                 className="w-full"

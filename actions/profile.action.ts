@@ -123,9 +123,23 @@ export async function updateLink(prevState: unknown, formData: FormData) {
     return { result: submission.reply(), status: 'error' };
   }
 
-  const { id, url, title } = submission.value;
+  const { id, url: username, title, type } = submission.value;
 
-  await db.update(link).set({ url, title }).where(eq(link.id, id));
+  // 選択されたリンクタイプに対応するbaseUrlを取得
+  const linkBaseUrl = LinkBaseUrlMap[type];
+  if (linkBaseUrl === undefined) {
+    return {
+      result: submission.reply({
+        formErrors: ['Invalid link type'],
+      }),
+      status: 'error',
+    };
+  }
+
+  // ユーザーネームとbaseUrlを連結
+  const fullUrl = `${linkBaseUrl}${username}`;
+
+  await db.update(link).set({ url: fullUrl, title }).where(eq(link.id, id));
 
   revalidatePath('/protected/dashboard');
   return { result: submission.reply(), status: 'success' };
