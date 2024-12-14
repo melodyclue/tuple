@@ -9,10 +9,9 @@ https://tuple.at/
 **The fastest way to create your profile.**
 
 
+https://github.com/user-attachments/assets/9eeaf3a3-48db-49be-aa07-74ba1b8054b2 
 
-
-https://github.com/user-attachments/assets/9eeaf3a3-48db-49be-aa07-74ba1b8054b2
-
+（Voice By [ondoku3.com](https://ondoku3.com/ja/)）
 
 
 
@@ -69,3 +68,4 @@ This project also served as an opportunity to:
 - [GitHub](https://github.com/melodyclue)
 - [X (Twitter)](https://x.com/use_melodyclue)
 - [YouTube](https://www.youtube.com/@melodyclue)
+
