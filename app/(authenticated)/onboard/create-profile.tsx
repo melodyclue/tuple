@@ -68,7 +68,7 @@ export const CreateProfile = () => {
 
             <FieldWithPrefix
               data1pIgnore={true}
-              prefix="tuple.link/"
+              prefix="tuple.at/"
               className="w-full"
               labelProps={{
                 children: 'Claim your unique link',

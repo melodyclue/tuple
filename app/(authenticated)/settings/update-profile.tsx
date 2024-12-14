@@ -50,7 +50,7 @@ export const UpdateProfile = ({ username, name }: UpdateProfileProps) => {
           <div className="flex w-full flex-col justify-between gap-5">
             <FieldWithPrefix
               data1pIgnore={true}
-              prefix="tuple.link/"
+              prefix="tuple.at/"
               className="w-full"
               labelProps={{
                 children: 'Your profile link',
